@@ -1,0 +1,103 @@
+<%- include('partials/header') %>
+<!-- navbar -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a href="/home" class="navbar-brand">Social Network</a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav">
+      <a href="/home" class="nav-item nav-link active">Home Feed</a>
+    </div>
+    <form class="form-inline ml-auto">
+      <input type="text" class="form-control mr-sm-2" placeholder="Search">
+      <button type="submit" class="btn btn-outline-light">Search</button>
+    </form>
+  </div>
+</nav>
+<!-- navbar -->
+
+<!-- profile data -->
+<div class="card" style="width: 25%;  margin-top: 30px; margin-left:25px; float:left;">
+  <div class="card-body">
+    <h5 class="card-title" style="text-allign:center"><i class="fa fa-user-circle" aria-hidden="true"></i> <%=name%></h5>
+    <img src="<%=pic%>" class="card-img-top" onerror="this.src='https://cms.qz.com/wp-content/uploads/2015/07/friends.jpg?quality=75&strip=all&w=3200&h=1808';" alt="" style="border-radius: 50%;" width="60" height="170" />
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><i class="fa fa-paper-plane" aria-hidden="true"></i> <%=email%></li>
+    <li class="list-group-item"><i class="fa fa-briefcase" aria-hidden="true"></i> <%=job%></li>
+    <li class="list-group-item"><i class="fa fa-map-marker" aria-hidden="true"></i> <%=address%></li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+<!-- profile data -->
+
+<!-- submit Post -->
+<div style="margin-left: 23%; height:100% ">
+
+  <form action="/profile" method="post" style="float:left; width:62%; height:280px ;margin:25px; margin-top:30px">
+    <h3>Submit Post</h3>
+    <div class="card gedf-card" style="padding:10px; margin-bottom:20px;">
+      <!-- <div class="form-group">
+      <label for="exampleFormControlInput1">Name</label>
+      <input class="form-control" id="exampleFormControlInput1">
+    </div> -->
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Caption</label>
+        <textarea class="form-control" placeholder="Whats on your mind?" name="caption" id="exampleFormControlTextarea1" rows="2"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Upload Image</label>
+        <input type="file" class="form-control-file" name="image" style="display: block;" id="exampleFormControlFile1">
+      </div>
+      <button type="submit" class="btn btn-dark" style="position: absolute;right: 20px; top: 150px;">Post</button>
+    </div>
+  </form>
+
+
+  <!-- submit Post -->
+
+  <!--- \\\\\\\Posts-->
+  <div style="margin-left:8%; width:100%">
+
+    <% posts.forEach(post => { %>
+    <% if (id.equals(post.postedBy)){ %>
+    <div class="card gedf-card" style="float:left; width:62%; height:280px ;margin:auto;margin-bottom:8%;">
+      <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="mr-2">
+              <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+            </div>
+            <% users.forEach(user => { %>
+            <% if (user._id.equals(post.postedBy)){%>
+            <div class="ml-2">
+              <div class="h5 m-0"> <%= user.name %> </div>
+              <div class="h7 text-muted"> <%= post.postedTime.toString().substring(0,24)%></div>
+            </div>
+            <% }}); %>
+          </div>
+        </div>
+      </div>
+
+      <div class="" style="padding:20px;margin-bottom:20px">
+        <h5 class="card-title"><%= post.caption %></h5>
+      </div>
+
+      <div class="card-footer" style="width: 100%;height: 190px;">
+        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+      </div>
+    </div>
+    <%}})%>
+  </div>
+  <!-- Post /////-->
+</div>
+
+
+<%- include('partials/footer') %>

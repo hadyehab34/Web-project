@@ -1,0 +1,88 @@
+<%- include('partials/header') %>
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a href="/home" class="navbar-brand">Social Network</a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav">
+      <a href="/home" class="nav-item nav-link active">Home</a>
+      <a href="/profile" name="profile" class="nav-item nav-link active">Profile</a>
+    </div>
+    <form class="form-inline ml-auto">
+      <input type="text" class="form-control mr-sm-2" placeholder="Search">
+      <button type="submit" class="btn btn-outline-light">Search</button>
+    </form>
+  </div>
+</nav>
+<!-- navbar -->
+
+<!-- submit Post -->
+
+<form style="width:62%; height:280px ;margin:auto; margin-top:30px; margin-bottom:50px">
+  <h3>Submit Post</h3>
+  <div class="card gedf-card" style="padding:10px; margin-bottom:50px;">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Name</label>
+      <input class="form-control" id="exampleFormControlInput1">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Caption</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Upload Image</label>
+      <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    </div>
+  </div>
+</form>
+
+
+<!-- submit Post -->
+
+<!--- \\\\\\\Posts-->
+<% posts.forEach(post => { %>
+<div class="card gedf-card" style="width:62%; height:280px ;margin:auto; margin-top:70px; margin-bottom:70px ">
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="mr-2">
+          <img class="rounded-circle" style="float: left; margin-right:20px" width="45" src="https://picsum.photos/50/50" alt="">
+        </div>
+        <% users.forEach(user => { %>
+        <% if (user._id.equals(post.postedBy)){%>
+        <div class="ml-2">
+          <div class="h5 m-0" style="margin-top:10px">
+            <%= user.name %>
+          </div>
+          <div class="h7 text-muted"> <%= post.postedTime.toString().substring(0,24)%></div>
+        </div>
+        <% }}); %>
+      </div>
+    </div>
+  </div>
+
+  <div class="" style="padding:20px;margin-bottom:100px">
+    <h5 class="card-text"><%= post.caption %></h5>
+  </div>
+
+
+  <div class="card-footer" style="width: 100%;height: 190px;">
+    <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+  </div>
+</div>
+<%})%>
+
+<!-- Post /////-->
+
+
+
+
+
+
+<%-  include('partials/footer') %>
